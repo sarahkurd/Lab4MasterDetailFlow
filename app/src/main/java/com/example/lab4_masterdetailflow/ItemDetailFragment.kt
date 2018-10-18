@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.example.lab4_masterdetailflow.dummy.SKurDatastore
 import kotlinx.android.synthetic.main.activity_item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
+import kotlinx.android.synthetic.main.item_detail_four.view.*
 
 /**
  * A fragment representing a single Item detail screen.
@@ -31,18 +32,22 @@ class ItemDetailFragment : Fragment() {
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
                 item = SKurDatastore.ITEM_MAP[it.getString(ARG_ITEM_ID)]
-                activity?.toolbar_layout?.title = item?.details
+                activity?.toolbar_layout?.title = item?.title
             }
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.item_detail, container, false)
+        val rootView = inflater.inflate(R.layout.item_detail_four, container, false)
 
         // Show the dummy content as text in a TextView.
         item?.let {
-            rootView.item_detail.text = it.details
+            rootView.myTitle.text = it.title
+            rootView.myPrepTime.text = it.prepTime.toString() + " min"
+            rootView.myIngredients.text = it.ingredients
+            rootView.myDetails.text = it.details
+            rootView.myHeartPerc.text = it.hearts.toString() + "%"
         }
 
         return rootView

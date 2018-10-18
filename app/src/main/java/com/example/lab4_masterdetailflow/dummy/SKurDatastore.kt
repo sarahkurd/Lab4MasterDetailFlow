@@ -8,7 +8,7 @@ import java.util.*
  *
  * TODO: Replace all uses of this class before publishing your app.
  */
-object SKurDatastore: {
+object SKurDatastore {
 
     /**
      * An array of sample (dummy) items.
@@ -37,7 +37,8 @@ object SKurDatastore: {
     }
 
     private fun createMyRecipe(position: Int): MyRecipe {
-        //return MyRecipe(position.toString(), datePosted = Date())
+        return MyRecipe(position.toString(), "Shrimp Pasta", 20, "shrimp",
+                "Grill the shrimp and add the garlic", 75)
     }
 
     private fun makeDetails(position: Int): String {
@@ -52,9 +53,12 @@ object SKurDatastore: {
     /**
      * A dummy item representing a piece of content.
      */
-    data class MyRecipe(val id: String, val datePosted: Date,
-                        val prepTime: Int, val ingredients: ArrayList<String>,
-                        val details: String, val imageUrl: String) {
-        override fun toString(): String = details
+    data class MyRecipe(val id: String, val title: String, val prepTime: Int,
+                        val ingredients: String, val details: String, val hearts: Int) {
+
+        override fun toString(): String {
+            //return id + " " + prepTime + " " + ingredients + " " + details
+            return "$id $prepTime $ingredients $details $hearts%"
+        }
     }
 }

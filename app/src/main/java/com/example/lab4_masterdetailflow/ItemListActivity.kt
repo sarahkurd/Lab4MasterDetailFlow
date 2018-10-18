@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 
 import com.example.lab4_masterdetailflow.dummy.SKurDatastore
@@ -38,10 +39,10 @@ class ItemListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         toolbar.title = title
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+//        fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show()
+//        }
 
         if (item_detail_container != null) {
             // The detail container view will be present only in the
@@ -59,7 +60,7 @@ class ItemListActivity : AppCompatActivity() {
     }
 
     class SimpleItemRecyclerViewAdapter(private val parentActivity: ItemListActivity,
-                                        private val values: List<SKurDatastore.DummyItem>,
+                                        private val values: List<SKurDatastore.MyRecipe>,
                                         private val twoPane: Boolean) :
             RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
@@ -67,7 +68,7 @@ class ItemListActivity : AppCompatActivity() {
 
         init {
             onClickListener = View.OnClickListener { v ->
-                val item = v.tag as SKurDatastore.DummyItem
+                val item = v.tag as SKurDatastore.MyRecipe
                 if (twoPane) {
                     val fragment = ItemDetailFragment().apply {
                         arguments = Bundle().apply {
@@ -96,7 +97,12 @@ class ItemListActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = values[position]
             holder.idView.text = item.id
-            holder.contentView.text = item.content
+            holder.titleView.text = item.title
+            holder.contentView.text = "Instructions: " + item.details
+            holder.prepTimeView.text = "Prep Time: " + item.prepTime.toString()
+            holder.ingredientsView.text = "Ingredients: " + item.ingredients
+            holder.heartView.text = "Heart Percentage: "  + item.hearts.toString() + "%"
+
 
             with(holder.itemView) {
                 tag = item
@@ -108,7 +114,12 @@ class ItemListActivity : AppCompatActivity() {
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val idView: TextView = view.id_text
+            val titleView: TextView = view.titleText
             val contentView: TextView = view.content
+            val prepTimeView: TextView = view.prepTimeText
+            val ingredientsView: TextView = view.ingredientsText
+            val heartView: TextView = view.heartsText
+
         }
     }
 }
