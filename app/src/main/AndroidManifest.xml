@@ -28,6 +28,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.lab4_masterdetailflow.ItemListActivity" />
         </activity>
+        <activity android:name=".ItemAddActivity"></activity>
     </application>
 
 </manifest>
